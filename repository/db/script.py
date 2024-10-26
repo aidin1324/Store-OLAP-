@@ -10,6 +10,8 @@ def load_csv_to_db(csv_path, table_name, db_path):
     '''
     conn = sqlite3.connect(db_path)
     df = pd.read_csv(csv_path)
+    if table_name == "sales":
+        df["sale_id"] = range(0, len(df))
     df.to_sql(table_name, conn, if_exists='replace', index=False)
     conn.close()
     

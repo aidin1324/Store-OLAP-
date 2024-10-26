@@ -16,16 +16,17 @@ class SaleRepository(BaseRepository):
             return Sale(**result)
         return None
 
-    def get_all_sales(self) -> list[Sale]:
-        self.cursor.execute('SELECT * FROM sales')
+    def get_all_sales(self, last_id: int = 0, limit: int = 10) -> list[Sale]:
+        self.cursor.execute('SELECT * FROM sales WHERE sale_id > ? ORDER BY sale_id ASC LIMIT ?', (last_id, limit))
         results = self.cursor.fetchall()
 
         sales = [
-            SaleCreate(
-                date=result[0],
-                product_id=result[1],
-                store_id=result[2],
-                quantity=result[3]
+            Sale(
+                sale_id=result[0],
+                date=result[1],
+                product_id=result[2],
+                store_id=result[3],
+                quantity=result[4]
             ) for result in results
         ]
 

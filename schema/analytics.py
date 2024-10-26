@@ -8,7 +8,13 @@ class SaleData(BaseModel):
         quantity: int
 
 
+class ShowData(BaseModel):
+    date: datetime
+    store_name: str
+    quantity_sold: float
+    
+
 class AnalyticsOutput(BaseModel):
-    total_quantity: int
+    total_sales: float
     total_amount: float
-    sales_data: list[SaleData]
+    grouped_by_stores: list[ShowData]

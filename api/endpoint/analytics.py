@@ -44,10 +44,10 @@ def render_analytics_template(
     product_name: str | None = None,
 ):
     analysis_data = analytics_service.show_basic_analysis(
-        start_date=start_date.strip(),
-        end_date=end_date.strip(),
-        store_name=store_name.strip(),
-        product_name=product_name.strip()
+        start_date=start_date.strip() if start_date else None,
+        end_date=end_date.strip() if end_date else None,
+        store_name=store_name.strip() if store_name else None,
+        product_name=product_name.strip() if product_name else None
     )
     
     return templates.TemplateResponse("analysis.html", {

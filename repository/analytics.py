@@ -41,7 +41,7 @@ class AnalyticsRepository(BaseRepository):
             params.append(store_name)
         
         if product_name:
-            query += " AND p.name = ?"
+            query += " AND p.product = ?"
             params.append(product_name)
         
         query += " GROUP BY st.name ORDER BY st.name"
